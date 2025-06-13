@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NikoOS</title>
+    <link rel="icon" type="image/webp" href="res/favicon.webp">
+
+    <meta property="og:title" content="NikoOS - Hızlı ve Sade ISO">
+    <meta property="og:description" content="NikoOS, hız ve güvenlik için optimize edilmiş bir modlanmış ISO.">
+    <meta property="og:image" content="https://snapzenic.github.io/NikoOS/res/site_preview.webp">
+    <meta property="og:url" content="https://snapzenic.github.io/NikoOS/">
+    <meta property="og:type" content="website">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="NikoOS - Hızlı ve Sade ISO">
+    <meta name="twitter:description" content="NikoOS, hız ve güvenlik için optimize edilmiş bir modlanmış ISO.">
+    <meta name="twitter:image" content="https://snapzenic.github.io/NikoOS/res/site_preview.webp">
+    <meta name="twitter:url" content="https://snapzenic.github.io/NikoOS/">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #155928;
+            --transition-speed: 0.5s;
+            --gradient-light: linear-gradient(135deg, #ffffff 0%, #f0f4f8 50%, #e0e6ed 100%);
+            --gradient-dark: linear-gradient(135deg, #2a2a2a 0%, #3c3f41 50%, #1e2022 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            transition: background var(--transition-speed), color var(--transition-speed);
+        }
+
+        body.light-theme {
+            background: var(--gradient-light);
+            color: #222;
+        }
+
+        body.dark-theme {
+            background: var(--gradient-dark);
+            color: #eaeaea;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 2px solid currentColor;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: all var(--transition-speed);
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(30deg) scale(1.1);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 30px;
+            text-align: center;
+            font-size: 14px;
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+        }
+    </style>
+</head>
+<body class="light-theme">
+    <header class="header">
+        <div style="font-weight: 600;">NikoOS</div>
+        <button class="theme-toggle" id="theme-toggle" title="Tema Değiştir">
+            <img src="res/moon.webp" alt="Tema İkonu" class="theme-icon" id="theme-icon" style="width: 24px; height: 24px;">
+        </button>
+    </header>
+
+    <!---->
+    <main style="margin-top: 100px; padding: 20px; text-align: center;">
+        <!---->
+    </main>
+
+    <footer>
+        &copy; 2025 NikoOS
+    </footer>
+</body>
+</html>
