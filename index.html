@@ -3,6 +3,7 @@
 <head>
     <title>Niko OS</title>
     <link rel="icon" type="image/webp" href="res/favicon.webp">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&display=swap');
@@ -89,7 +90,7 @@
     <header class="header">
         <div style="font-weight: 600;">Niko OS</div>
         <button class="theme-toggle" id="theme-toggle" title="Tema Değiştir">
-            <img src="res/moon.webp" alt="Karanlık Tema" class="theme-icon" id="theme-icon" style="width: 24px; height: 24px;">
+           <i class="fa-solid fa-moon" id="theme-icon"></i>
         </button>
     </header>
 
@@ -109,22 +110,22 @@
     if (savedTheme === 'dark') {
         body.classList.remove('light-theme');
         body.classList.add('dark-theme');
-        themeIcon.src = 'res/sun.webp';
-        themeIcon.alt = 'Aydınlık Tema';
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
     }
 
     toggleButton.addEventListener('click', () => {
         if (body.classList.contains('light-theme')) {
             body.classList.remove('light-theme');
             body.classList.add('dark-theme');
-            themeIcon.src = 'res/sun.webp';
-            themeIcon.alt = 'Aydınlık Tema';
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
             localStorage.setItem('theme', 'dark');
         } else {
             body.classList.remove('dark-theme');
             body.classList.add('light-theme');
-            themeIcon.src = 'res/moon.webp';
-            themeIcon.alt = 'Karanlık Tema';
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
             localStorage.setItem('theme', 'light');
         }
     });
