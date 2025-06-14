@@ -32,12 +32,14 @@
 
         body.light-theme {
             background: var(--gradient-light);
+            border-color: #222;
             color: #222;
         }
 
         body.dark-theme {
             background: var(--gradient-dark);
-            color: #eaeaea;
+            border-color: white;
+            color: white;
         }
 
         .header {
@@ -53,8 +55,8 @@
         }
 
         .theme-icon {
-            width: 24px;
-            height: 24px;
+            font-size: 20px;
+            transition: color var(--transition-speed);
         }
         
         .theme-toggle {
