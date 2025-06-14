@@ -90,5 +90,34 @@
     <footer>
         &copy; 2025 Niko OS Team
     </footer>
+    <script>
+    const toggleButton = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const body = document.body;
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        body.classList.remove('light-theme');
+        body.classList.add('dark-theme');
+        themeIcon.src = 'res/sun.webp';
+        themeIcon.alt = 'Aydınlık Tema';
+    }
+
+    toggleButton.addEventListener('click', () => {
+        if (body.classList.contains('light-theme')) {
+            body.classList.remove('light-theme');
+            body.classList.add('dark-theme');
+            themeIcon.src = 'res/sun.webp';
+            themeIcon.alt = 'Aydınlık Tema';
+            localStorage.setItem('theme', 'dark');
+        } else {
+            body.classList.remove('dark-theme');
+            body.classList.add('light-theme');
+            themeIcon.src = 'res/moon.webp';
+            themeIcon.alt = 'Karanlık Tema';
+            localStorage.setItem('theme', 'light');
+        }
+    });
+    </script>
 </body>
 </html>
