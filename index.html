@@ -97,67 +97,54 @@
             backdrop-filter: blur(5px);
         }
 
-        #fog-container {
-    position: relative;
-    width: 300px;
-    height: 300px;
-    margin: 100px auto;
-    border-radius: 50%;
+        #fog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
     overflow: hidden;
-    background: radial-gradient(circle at center, rgba(255,255,255,0.1), transparent 70%);
-    box-shadow: 0 0 60px rgba(255, 255, 255, 0.2);
 }
 
-#fog-container::before,
-#fog-container::after {
+#fog-overlay::before,
+#fog-overlay::after {
     content: "";
     position: absolute;
-    width: 150%;
-    height: 150%;
+    width: 200%;
+    height: 200%;
     background: url('https://www.transparenttextures.com/patterns/fog.png');
     background-size: cover;
     opacity: 0.05;
-    animation: moveFog 120s linear infinite;
-    border-radius: 50%;
+    animation: fogMove 90s linear infinite;
 }
 
-#fog-container::after {
+#fog-overlay::after {
     animation-direction: reverse;
 }
 
-@keyframes moveFog {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-                }
-
-@keyframes rotate {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+@keyframes fogMove {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(-25%, -25%) rotate(360deg); }
 }
 
-.download-button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 15px 30px;
-    font-size: 18px;
-    font-weight: 600;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    background: linear-gradient(135deg, #00c6ff, #0072ff);
-    color: white;
-    box-shadow: 0 0 15px rgba(0, 114, 255, 0.6), 0 0 30px rgba(0, 114, 255, 0.3);
-    transition: all 0.3s ease;
+
+body.light-theme #fog-overlay::before,
+body.light-theme #fog-overlay::after {
+    opacity: 0.08;
+    filter: brightness(0.9);
 }
 
-.download-button:hover {
-    transform: translate(-50%, -50%) scale(1.1);
-    box-shadow: 0 0 25px rgba(0, 114, 255, 0.8), 0 0 50px rgba(0, 114, 255, 0.4);
+body.dark-theme #fog-overlay::before,
+body.dark-theme #fog-overlay::after {
+    opacity: 0.05;
+    filter: brightness(1.5) contrast(1.2);
         }
     </style>
 </head>
+    <div id="fog-overlay"></div>
 <body class="light-theme">
     <header class="header">
         <div style="font-weight: 600;">Niko OS</div>
