@@ -101,11 +101,10 @@
     position: relative;
     width: 300px;
     height: 300px;
-    margin: 0 auto;
+    margin: 100px auto;
     border-radius: 50%;
     overflow: hidden;
     background: radial-gradient(circle at center, rgba(255,255,255,0.1), transparent 70%);
-    animation: rotate 60s linear infinite;
     box-shadow: 0 0 60px rgba(255, 255, 255, 0.2);
 }
 
@@ -119,6 +118,7 @@
     background-size: cover;
     opacity: 0.05;
     animation: moveFog 120s linear infinite;
+    border-radius: 50%;
 }
 
 #fog-container::after {
@@ -126,9 +126,9 @@
 }
 
 @keyframes moveFog {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(-20%, -20%); }
-}
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+                }
 
 @keyframes rotate {
     0% { transform: rotate(0deg); }
