@@ -130,15 +130,16 @@
     <main style="margin-top: 100px; padding: 20px; text-align: center;">
         <section style="padding: 80px 20px;">
   <div class="glass-box">
-    <h2 style="
-      font-size: 2.5rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, #4CAF50, #2196F3);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 10px;
-    ">
-      Optimize edilmiş Windows.
+    <h2 id="changing-text" style="
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4CAF50, #2196F3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            transition: all 1s ease;
+            ">
+              Optimize edilmiş Windows.
     </h2>
     <h3 style="
       font-size: 2rem;
@@ -214,6 +215,43 @@
             localStorage.setItem('theme', 'light');
         }
     });
+
+     const texts = [
+  {
+    content: "Optimize edilmiş Windows.",
+    gradient: "linear-gradient(135deg, #4CAF50, #2196F3)"
+  },
+  {
+    content: "Gizlilik odaklı Windows.",
+    gradient: "linear-gradient(135deg, #8E24AA, #D81B60)"
+  },
+  {
+    content: "Sizi ön planda tutan Windows.",
+    gradient: "linear-gradient(135deg, #FF9800, #F44336)"
+  },
+  {
+    content: "Kararlı ve hafif Windows.",
+    gradient: "linear-gradient(135deg, #00BCD4, #3F51B5)"
+  }
+];
+
+let currentIndex = 0;
+const textElement = document.getElementById('changing-text');
+
+setInterval(() => {
+  currentIndex = (currentIndex + 1) % texts.length;
+  const current = texts[currentIndex];
+
+  textElement.style.opacity = '0';
+
+  setTimeout(() => {
+    textElement.textContent = current.content;
+    textElement.style.background = current.gradient;
+    textElement.style.webkitBackgroundClip = 'text';
+    textElement.style.webkitTextFillColor = 'transparent';
+    textElement.style.opacity = '1';
+  }, 500);
+}, 10000);
     </script>
 </body>
 </html>
