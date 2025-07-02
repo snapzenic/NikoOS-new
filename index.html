@@ -1,257 +1,274 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <title>Niko OS</title>
-    <link rel="icon" type="image/webp" href="res/favicon.webp">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title>Niko OS</title>
+  <link rel="icon" type="image/webp" href="res/favicon.webp">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&display=swap');
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&display=swap');
 
-        :root {
-            --primary-color: #4CAF50;
-            --secondary-color: #155928;
-            --transition-speed: 0.5s;
-            --gradient-light: linear-gradient(135deg, #ffffff 0%, #f0f4f8 50%, #e0e6ed 100%);
-            --gradient-dark: linear-gradient(135deg, #2a2a2a 0%, #3c3f41 50%, #1e2022 100%);
-        }
+    :root {
+      --primary-color: #4CAF50;
+      --secondary-color: #155928;
+      --transition-speed: 0.5s;
+      --gradient-light: linear-gradient(135deg, #ffffff 0%, #f0f4f8 50%, #e0e6ed 100%);
+      --gradient-dark: linear-gradient(135deg, #2a2a2a 0%, #3c3f41 50%, #1e2022 100%);
+    }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        body {
-            font-family: 'Comfortaa', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            transition: background var(--transition-speed), color var(--transition-speed);
-        }
+    body {
+      font-family: 'Comfortaa', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background var(--transition-speed), color var(--transition-speed);
+    }
 
-        body.light-theme {
-            background: var(--gradient-light);
-            color: #222;
-        }
+    body.light-theme {
+      background: var(--gradient-light);
+      color: #222;
+    }
 
-        body.dark-theme {
-            background: var(--gradient-dark);
-            color: #eaeaea;
-        }
+    body.dark-theme {
+      background: var(--gradient-dark);
+      color: #eaeaea;
+    }
 
-        .header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-        }
+    .header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+    }
 
-        .theme-icon {
-            font-size: 20px;
-            transition: color var(--transition-speed);
-        }
-        
-        .theme-toggle {
-            background: none;
-            border: 2px solid currentColor;
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: all var(--transition-speed);
-            padding: 0;
-        }
+    .theme-icon {
+      font-size: 20px;
+      transition: color var(--transition-speed);
+    }
 
-        body.light-theme .theme-toggle {
-            background-color: white;
-            border-color: #222;
-            color: #222;
-        }
+    .theme-toggle {
+      background: none;
+      border: 2px solid currentColor;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all var(--transition-speed);
+      padding: 0;
+    }
 
-        body.dark-theme .theme-toggle {
-           background-color: transparent;
-           border-color: white;
-           color: white;
-        }
-        
-        .theme-toggle:hover {
-            transform: rotate(30deg) scale(1.1);
-            background-color: rgba(255, 255, 255, 0.1);
-        }
+    body.light-theme .theme-toggle {
+      background-color: white;
+      border-color: #222;
+      color: #222;
+    }
 
-        footer {
-            margin-top: auto;
-            padding: 30px;
-            text-align: center;
-            font-size: 14px;
-            background: rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(5px);
+    body.dark-theme .theme-toggle {
+      background-color: transparent;
+      border-color: white;
+      color: white;
+    }
 
-        .glass-box {
-            max-width: 800px;
-            margin: auto;
-            padding: 40px 30px;
-            border-radius: 20px;
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-            transition: background var(--transition-speed), color var(--transition-speed);
-        }
+    .theme-toggle:hover {
+      transform: rotate(30deg) scale(1.1);
+      background-color: rgba(255, 255, 255, 0.1);
+    }
 
-        body.light-theme .glass-box {
-            background: rgba(255, 255, 255, 0.6);
-            color: #111;
-        }
+    footer {
+      margin-top: auto;
+      padding: 30px;
+      text-align: center;
+      font-size: 14px;
+      background: rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(5px);
+    }
 
-        body.dark-theme .glass-box {
-            background: rgba(20, 20, 20, 0.2);
-            color: #eee;
-        }
-    </style>
+    .glass-box {
+      max-width: 800px;
+      margin: auto;
+      padding: 40px 30px;
+      border-radius: 20px;
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      transition: background var(--transition-speed), color var(--transition-speed);
+    }
+
+    body.light-theme .glass-box {
+      background: rgba(255, 255, 255, 0.6);
+      color: #111;
+    }
+
+    body.dark-theme .glass-box {
+      background: rgba(20, 20, 20, 0.2);
+      color: #eee;
+    }
+
+    .terminal-box {
+      background-color: rgba(0, 0, 0, 0.8);
+      color: #33ff33;
+      font-family: 'Courier New', monospace;
+      padding: 25px 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,255,0,0.2);
+      max-width: 800px;
+      margin: 40px auto 20px;
+      font-size: 1.1rem;
+      white-space: pre-wrap;
+      backdrop-filter: blur(5px);
+      position: relative;
+    }
+
+    .blinking-cursor {
+      animation: blink 1s step-start infinite;
+      color: #33ff33;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+  </style>
 </head>
 <body class="light-theme">
-    <header class="header">
-        <div style="font-weight: 600;">&num;Niko OS</div>
-        <button class="theme-toggle" id="theme-toggle" title="Tema Değiştir">
-           <i class="fa-solid fa-moon" id="theme-icon"></i>
-        </button>
-    </header>
+  <header class="header">
+    <div style="font-weight: 600;">&num;Niko OS</div>
+    <button class="theme-toggle" id="theme-toggle" title="Tema Değiştir">
+      <i class="fa-solid fa-moon" id="theme-icon"></i>
+    </button>
+  </header>
 
-    <main style="margin-top: 100px; padding: 20px; text-align: center;">
-        <section style="padding: 80px 20px;">
-  <div class="glass-box">
-    <h2 id="changing-text" style="
-            font-size: 2.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #4CAF50, #2196F3);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
-            transition: all 1s ease;
-            ">
-              Optimize edilmiş Windows.
-    </h2>
-    <h3 style="
-      font-size: 2rem;
-      font-weight: 600;
-      margin-bottom: 30px;
-    ">
-      Gerçek kullanıcılar için tasarlandı.
-    </h3>
+  <main style="margin-top: 100px; padding: 20px; text-align: center;">
+    <section style="padding: 80px 20px;">
+      <div class="glass-box">
+        <div class="terminal-box">
+          <span>C:\Users\Niko&gt; </span><span id="typed-text"></span><span class="blinking-cursor">█</span>
+        </div>
 
-    <p style="max-width: 600px; margin: 0 auto 30px; font-size: 1.1rem;">
-      Niko OS 10, gereksiz servislerden arındırılmış, performansa odaklı modlanmış bir Windows deneyimi sunar. Daha hızlı, daha sade, daha özgür.
-    </p>
+        <h3 style="font-size: 2rem; font-weight: 600; margin-bottom: 30px;">
+          Gerçek kullanıcılar için tasarlandı.
+        </h3>
 
-    <p style="font-size: 0.95rem; opacity: 0.8; margin-bottom: 30px;">
-      En son sürüm: <strong>Niko OS 10 22H2 (Haziran 2025)</strong>
-    </p>
+        <p style="max-width: 600px; margin: 0 auto 30px; font-size: 1.1rem;">
+          Niko OS 10, gereksiz servislerden arındırılmış, performansa odaklı modlanmış bir Windows deneyimi sunar. Daha hızlı, daha sade, daha özgür.
+        </p>
 
-    <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-      <a href="#indir" style="
-        padding: 12px 24px;
-        border-radius: 9999px;
-        background: linear-gradient(135deg, #4CAF50, #155928);
-        color: white;
-        text-decoration: none;
-        font-weight: 600;
-        transition: background 0.3s ease;
-      ">Başla</a>
+        <p style="font-size: 0.95rem; opacity: 0.8; margin-bottom: 30px;">
+          En son sürüm: <strong>Niko OS 10 22H2 (Haziran 2025)</strong>
+        </p>
 
-      <a href="https://github.com/snapzenic/NikoOS-new" target="_blank" style="
-        padding: 12px 24px;
-        border-radius: 9999px;
-        background-color: transparent;
-        border: 2px solid currentColor;
-        text-decoration: none;
-        font-weight: 600;
-        color: inherit;
-        transition: background 0.3s ease;
-      ">GitHub'da Gör</a>
-    </div>
-  </div>
-        </section>
-        <!---->
-    </main>
+        <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+          <a href="#indir" style="
+            padding: 12px 24px;
+            border-radius: 9999px;
+            background: linear-gradient(135deg, #4CAF50, #155928);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s ease;
+          ">Başla</a>
 
-    <footer>
-        &copy; 2025 Niko OS Team
-    </footer>
-    <script>
+          <a href="https://github.com/snapzenic/NikoOS-new" target="_blank" style="
+            padding: 12px 24px;
+            border-radius: 9999px;
+            background-color: transparent;
+            border: 2px solid currentColor;
+            text-decoration: none;
+            font-weight: 600;
+            color: inherit;
+            transition: background 0.3s ease;
+          ">GitHub'da Gör</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Niko OS Team
+  </footer>
+
+  <script>
     const toggleButton = document.getElementById('theme-toggle');
     const themeIcon = document.getElementById('theme-icon');
     const body = document.body;
 
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
+      body.classList.remove('light-theme');
+      body.classList.add('dark-theme');
+      themeIcon.classList.remove('fa-moon');
+      themeIcon.classList.add('fa-sun');
+    }
+
+    toggleButton.addEventListener('click', () => {
+      if (body.classList.contains('light-theme')) {
         body.classList.remove('light-theme');
         body.classList.add('dark-theme');
         themeIcon.classList.remove('fa-moon');
         themeIcon.classList.add('fa-sun');
-    }
-
-    toggleButton.addEventListener('click', () => {
-        if (body.classList.contains('light-theme')) {
-            body.classList.remove('light-theme');
-            body.classList.add('dark-theme');
-            themeIcon.classList.remove('fa-moon');
-            themeIcon.classList.add('fa-sun');
-            localStorage.setItem('theme', 'dark');
-        } else {
-            body.classList.remove('dark-theme');
-            body.classList.add('light-theme');
-            themeIcon.classList.remove('fa-sun');
-            themeIcon.classList.add('fa-moon');
-            localStorage.setItem('theme', 'light');
-        }
+        localStorage.setItem('theme', 'dark');
+      } else {
+        body.classList.remove('dark-theme');
+        body.classList.add('light-theme');
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
+        localStorage.setItem('theme', 'light');
+      }
     });
 
-     const texts = [
-  {
-    content: "Optimize edilmiş Windows.",
-    gradient: "linear-gradient(135deg, #4CAF50, #2196F3)"
-  },
-  {
-    content: "Gizlilik odaklı Windows.",
-    gradient: "linear-gradient(135deg, #8E24AA, #D81B60)"
-  },
-  {
-    content: "Sizi ön planda tutan Windows.",
-    gradient: "linear-gradient(135deg, #FF9800, #F44336)"
-  },
-  {
-    content: "Kararlı ve hafif Windows.",
-    gradient: "linear-gradient(135deg, #00BCD4, #3F51B5)"
-  }
-];
+    const phrases = [
+      "Optimize edilmiş Windows.",
+      "Gizliliğin öncelikli olduğu Windows.",
+      "Sizi ön planda tutan Windows.",
+      "Kararlı ve hafif Windows.",
+      "Gereksiz hizmetlerden arındırılmış Windows."
+    ];
 
-let currentIndex = 0;
-const textElement = document.getElementById('changing-text');
+    const typedText = document.getElementById('typed-text');
+    let currentPhraseIndex = 0;
+    let currentCharIndex = 0;
+    let typing = true;
 
-setInterval(() => {
-  currentIndex = (currentIndex + 1) % texts.length;
-  const current = texts[currentIndex];
+    function typeWriterEffect() {
+      const currentPhrase = phrases[currentPhraseIndex];
 
-  textElement.style.opacity = '0';
+      if (typing) {
+        if (currentCharIndex <= currentPhrase.length) {
+          typedText.textContent = currentPhrase.slice(0, currentCharIndex);
+          currentCharIndex++;
+          setTimeout(typeWriterEffect, 50);
+        } else {
+          typing = false;
+          setTimeout(typeWriterEffect, 2000); // Bekleme süresi
+        }
+      } else {
+        if (currentCharIndex >= 0) {
+          typedText.textContent = currentPhrase.slice(0, currentCharIndex);
+          currentCharIndex--;
+          setTimeout(typeWriterEffect, 30); // Silme daha hızlı
+        } else {
+          typing = true;
+          currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+          setTimeout(typeWriterEffect, 500);
+        }
+      }
+    }
 
-  setTimeout(() => {
-    textElement.textContent = current.content;
-    textElement.style.background = current.gradient;
-    textElement.style.webkitBackgroundClip = 'text';
-    textElement.style.webkitTextFillColor = 'transparent';
-    textElement.style.opacity = '1';
-  }, 500);
-}, 10000);
-    </script>
+    typeWriterEffect();
+  </script>
 </body>
-</html>
+        </html>
