@@ -4,22 +4,19 @@
   <title>Niko OS</title>
   <link rel="icon" type="image/webp" href="res/favicon.webp">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&display=swap');
 
     :root {
-      --primary-color: #4CAF50;
-      --secondary-color: #155928;
       --transition-speed: 0.5s;
       --gradient-light: linear-gradient(135deg, #ffffff 0%, #f0f4f8 50%, #e0e6ed 100%);
       --gradient-dark: linear-gradient(135deg, #2a2a2a 0%, #3c3f41 50%, #1e2022 100%);
     }
 
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
     body {
@@ -27,7 +24,10 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      align-items: center;
       transition: background var(--transition-speed), color var(--transition-speed);
+      text-align: center;
+      padding: 100px 20px 40px;
     }
 
     body.light-theme {
@@ -52,11 +52,6 @@
       z-index: 1000;
     }
 
-    .theme-icon {
-      font-size: 20px;
-      transition: color var(--transition-speed);
-    }
-
     .theme-toggle {
       background: none;
       border: 2px solid currentColor;
@@ -68,7 +63,10 @@
       justify-content: center;
       border-radius: 50%;
       transition: all var(--transition-speed);
-      padding: 0;
+    }
+
+    .theme-icon {
+      font-size: 20px;
     }
 
     body.light-theme .theme-toggle {
@@ -93,30 +91,7 @@
       padding: 30px;
       text-align: center;
       font-size: 14px;
-      background: rgba(0, 0, 0, 0.1);
       backdrop-filter: blur(5px);
-    }
-
-    .glass-box {
-      max-width: 800px;
-      margin: auto;
-      padding: 40px 30px;
-      border-radius: 20px;
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-      transition: background var(--transition-speed), color var(--transition-speed);
-    }
-
-    body.light-theme .glass-box {
-      background: rgba(255, 255, 255, 0.6);
-      color: #111;
-    }
-
-    body.dark-theme .glass-box {
-      background: rgba(20, 20, 20, 0.2);
-      color: #eee;
     }
 
     #changing-text {
@@ -125,8 +100,47 @@
       background: linear-gradient(135deg, #4CAF50, #2196F3);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 10px;
       transition: background 0.5s ease;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 30px;
+    }
+
+    p {
+      max-width: 700px;
+      margin: 0 auto 30px;
+      font-size: 1.1rem;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .buttons a {
+      padding: 12px 24px;
+      border-radius: 9999px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    .start-btn {
+      background: linear-gradient(135deg, #4CAF50, #155928);
+      color: white;
+    }
+
+    .github-btn {
+      background-color: transparent;
+      border: 2px solid currentColor;
+      color: inherit;
     }
   </style>
 </head>
@@ -134,51 +148,27 @@
   <header class="header">
     <div style="font-weight: 600;">&num;Niko OS</div>
     <button class="theme-toggle" id="theme-toggle" title="Tema Değiştir">
-      <i class="fa-solid fa-moon" id="theme-icon"></i>
+      <i class="fa-solid fa-moon theme-icon" id="theme-icon"></i>
     </button>
   </header>
 
-  <main style="margin-top: 100px; padding: 20px; text-align: center;">
-    <section style="padding: 80px 20px;">
-      <div class="glass-box">
-        <h2 id="changing-text"></h2>
+  <main>
+    <h2 id="changing-text"></h2>
 
-        <h3 style="font-size: 2rem; font-weight: 600; margin-bottom: 30px;">
-          Gerçek kullanıcılar için tasarlandı.
-        </h3>
+    <h3>Gerçek kullanıcılar için tasarlandı.</h3>
 
-        <p style="max-width: 600px; margin: 0 auto 30px; font-size: 1.1rem;">
-          Niko OS 10, gereksiz servislerden arındırılmış, performansa odaklı modlanmış bir Windows deneyimi sunar. Daha hızlı, daha sade, daha özgür.
-        </p>
+    <p>
+      Niko OS 10, gereksiz servislerden arındırılmış, performansa odaklı modlanmış bir Windows deneyimi sunar. Daha hızlı, daha sade, daha özgür.
+    </p>
 
-        <p style="font-size: 0.95rem; opacity: 0.8; margin-bottom: 30px;">
-          En son sürüm: <strong>Niko OS 10 22H2 (Haziran 2025)</strong>
-        </p>
+    <p style="font-size: 0.95rem; opacity: 0.8;">
+      En son sürüm: <strong>Niko OS 10 22H2 (Haziran 2025)</strong>
+    </p>
 
-        <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-          <a href="#indir" style="
-            padding: 12px 24px;
-            border-radius: 9999px;
-            background: linear-gradient(135deg, #4CAF50, #155928);
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background 0.3s ease;
-          ">Başla</a>
-
-          <a href="https://github.com/snapzenic/NikoOS-new" target="_blank" style="
-            padding: 12px 24px;
-            border-radius: 9999px;
-            background-color: transparent;
-            border: 2px solid currentColor;
-            text-decoration: none;
-            font-weight: 600;
-            color: inherit;
-            transition: background 0.3s ease;
-          ">GitHub'da Gör</a>
-        </div>
-      </div>
-    </section>
+    <div class="buttons">
+      <a href="#indir" class="start-btn">Başla</a>
+      <a href="https://github.com/snapzenic/NikoOS-new" target="_blank" class="github-btn">GitHub'da Gör</a>
+    </div>
   </main>
 
   <footer>
@@ -200,16 +190,12 @@
 
     toggleButton.addEventListener('click', () => {
       if (body.classList.contains('light-theme')) {
-        body.classList.remove('light-theme');
-        body.classList.add('dark-theme');
-        themeIcon.classList.remove('fa-moon');
-        themeIcon.classList.add('fa-sun');
+        body.classList.replace('light-theme', 'dark-theme');
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
         localStorage.setItem('theme', 'dark');
       } else {
-        body.classList.remove('dark-theme');
-        body.classList.add('light-theme');
-        themeIcon.classList.remove('fa-sun');
-        themeIcon.classList.add('fa-moon');
+        body.classList.replace('dark-theme', 'light-theme');
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
         localStorage.setItem('theme', 'light');
       }
     });
