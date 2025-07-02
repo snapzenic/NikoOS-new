@@ -119,28 +119,14 @@
       color: #eee;
     }
 
-    .terminal-box {
-      background-color: rgba(0, 0, 0, 0.8);
-      color: #33ff33;
-      font-family: 'Courier New', monospace;
-      padding: 25px 30px;
-      border-radius: 15px;
-      box-shadow: 0 0 15px rgba(0,255,0,0.2);
-      max-width: 800px;
-      margin: 40px auto 20px;
-      font-size: 1.1rem;
-      white-space: pre-wrap;
-      backdrop-filter: blur(5px);
-      position: relative;
-    }
-
-    .blinking-cursor {
-      animation: blink 1s step-start infinite;
-      color: #33ff33;
-    }
-
-    @keyframes blink {
-      50% { opacity: 0; }
+    #changing-text {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #4CAF50, #2196F3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+      transition: background 0.5s ease;
     }
   </style>
 </head>
@@ -155,9 +141,7 @@
   <main style="margin-top: 100px; padding: 20px; text-align: center;">
     <section style="padding: 80px 20px;">
       <div class="glass-box">
-        <div class="terminal-box">
-          <span>C:\Users\Niko&gt; </span><span id="typed-text"></span><span class="blinking-cursor">█</span>
-        </div>
+        <h2 id="changing-text"></h2>
 
         <h3 style="font-size: 2rem; font-weight: 600; margin-bottom: 30px;">
           Gerçek kullanıcılar için tasarlandı.
@@ -231,35 +215,38 @@
     });
 
     const phrases = [
-      "Optimize edilmiş Windows.",
-      "Gizliliğin öncelikli olduğu Windows.",
-      "Sizi ön planda tutan Windows.",
-      "Kararlı ve hafif Windows.",
-      "Gereksiz hizmetlerden arındırılmış Windows."
+      { text: "Optimize edilmiş Windows.", gradient: "linear-gradient(135deg, #4CAF50, #2196F3)" },
+      { text: "Gizlilik odaklı Windows.", gradient: "linear-gradient(135deg, #8E24AA, #D81B60)" },
+      { text: "Sizi ön planda tutan Windows.", gradient: "linear-gradient(135deg, #FF9800, #F44336)" },
+      { text: "Kararlı ve hafif Windows.", gradient: "linear-gradient(135deg, #00BCD4, #3F51B5)" },
+      { text: "Gereksiz hizmetlerden arındırılmış Windows.", gradient: "linear-gradient(135deg, #4CAF50, #FF5722)" }
     ];
 
-    const typedText = document.getElementById('typed-text');
+    const typedText = document.getElementById('changing-text');
     let currentPhraseIndex = 0;
     let currentCharIndex = 0;
     let typing = true;
 
     function typeWriterEffect() {
-      const currentPhrase = phrases[currentPhraseIndex];
+      const phrase = phrases[currentPhraseIndex];
 
       if (typing) {
-        if (currentCharIndex <= currentPhrase.length) {
-          typedText.textContent = currentPhrase.slice(0, currentCharIndex);
+        if (currentCharIndex <= phrase.text.length) {
+          typedText.textContent = phrase.text.slice(0, currentCharIndex);
+          typedText.style.background = phrase.gradient;
+          typedText.style.webkitBackgroundClip = 'text';
+          typedText.style.webkitTextFillColor = 'transparent';
           currentCharIndex++;
           setTimeout(typeWriterEffect, 50);
         } else {
           typing = false;
-          setTimeout(typeWriterEffect, 2000); // Bekleme süresi
+          setTimeout(typeWriterEffect, 2000);
         }
       } else {
         if (currentCharIndex >= 0) {
-          typedText.textContent = currentPhrase.slice(0, currentCharIndex);
+          typedText.textContent = phrase.text.slice(0, currentCharIndex);
           currentCharIndex--;
-          setTimeout(typeWriterEffect, 30); // Silme daha hızlı
+          setTimeout(typeWriterEffect, 30);
         } else {
           typing = true;
           currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
@@ -271,4 +258,4 @@
     typeWriterEffect();
   </script>
 </body>
-        </html>
+      </html>
