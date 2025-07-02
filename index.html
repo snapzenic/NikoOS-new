@@ -209,9 +209,20 @@
     ];
 
     const typedText = document.getElementById('changing-text');
-    let currentPhraseIndex = 0;
-    let currentCharIndex = 0;
-    let typing = true;
+
+    let savedPhraseIndex = localStorage.getItem('phraseIndex');
+    let savedCharIndex = localStorage.getItem('charIndex');
+    let savedTyping = localStorage.getItem('typing');
+
+    let currentPhraseIndex = savedPhraseIndex !== null ? parseInt(savedPhraseIndex) : 0;
+    let currentCharIndex = savedCharIndex !== null ? parseInt(savedCharIndex) : 0;
+    let typing = savedTyping !== null ? (savedTyping === 'true') : true;
+
+    function saveState() {
+      localStorage.setItem('phraseIndex', currentPhraseIndex);
+      localStorage.setItem('charIndex', currentCharIndex);
+      localStorage.setItem('typing', typing);
+    }
 
     function typeWriterEffect() {
       const phrase = phrases[currentPhraseIndex];
@@ -222,20 +233,26 @@
           typedText.style.background = phrase.gradient;
           typedText.style.webkitBackgroundClip = 'text';
           typedText.style.webkitTextFillColor = 'transparent';
+
           currentCharIndex++;
+          saveState();
+
           setTimeout(typeWriterEffect, 50);
         } else {
           typing = false;
+          saveState();
           setTimeout(typeWriterEffect, 2000);
         }
       } else {
         if (currentCharIndex >= 0) {
           typedText.textContent = phrase.text.slice(0, currentCharIndex);
           currentCharIndex--;
+          saveState();
           setTimeout(typeWriterEffect, 30);
         } else {
           typing = true;
           currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+          saveState();
           setTimeout(typeWriterEffect, 500);
         }
       }
