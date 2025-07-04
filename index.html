@@ -213,35 +213,32 @@
     let typing = true;
 
     function typeWriterEffect() {
-      const phrase = phrases[currentPhraseIndex];
+  const phrase = phrases[currentPhraseIndex];
 
-      if (typing) {
-        if (currentCharIndex <= phrase.text.length) {
-          typedText.innerText = phrase.text.slice(0, currentCharIndex);
-          typedText.style.background = phrase.gradient;
-          typedText.style.webkitBackgroundClip = 'text';
-          typedText.style.webkitTextFillColor = 'transparent';
-          currentCharIndex++;
-          setTimeout(typeWriterEffect, 50);
-        } else {
-          typing = false;
-          setTimeout(typeWriterEffect, 5000);
-        }
-      } else {
-        if (currentCharIndex >= 0) {
-          typedText.innerText = phrase.text.slice(0, currentCharIndex);
-          currentCharIndex--;
-          setTimeout(typeWriterEffect, 30);
-        } else {
-          typedText.innerText = '';
-          typedText.style.background = 'none';
-          typedText.style.webkitBackgroundClip = 'unset';
-          typedText.style.webkitTextFillColor = 'unset';
-          typing = true;
-          currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
-          setTimeout(typeWriterEffect, 500);
-        }
-      }
+  if (typing) {
+    if (currentCharIndex <= phrase.text.length) {
+      typedText.textContent = phrase.text.slice(0, currentCharIndex);
+      typedText.style.background = phrase.gradient;
+      typedText.style.webkitBackgroundClip = 'text';
+      typedText.style.webkitTextFillColor = 'transparent';
+      currentCharIndex++;
+      setTimeout(typeWriterEffect, 50);
+    } else {
+      typing = false;
+      currentCharIndex = phrase.text.length - 1; // <<< BUNU EKLE
+      setTimeout(typeWriterEffect, 4000);
+    }
+  } else {
+    if (currentCharIndex >= 0) {
+      typedText.textContent = phrase.text.slice(0, currentCharIndex);
+      currentCharIndex--;
+      setTimeout(typeWriterEffect, 30);
+    } else {
+      typing = true;
+      currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+      setTimeout(typeWriterEffect, 500);
+    }
+  }
     }
 
     typeWriterEffect();
