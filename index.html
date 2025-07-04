@@ -163,17 +163,9 @@
 
   <main>
     <h2 id="changing-text"></h2>
-
     <h3>İleri seviye kullanıcılar için tasarlandı.</h3>
-
-    <p>
-      Niko OS, gereksiz servislerden arındırılmış, performansa odaklı modlanmış bir Windows deneyimi sunar. Daha hızlı, daha sade, daha özgür.
-    </p>
-
-    <p style="font-size: 0.95rem; opacity: 0.8;">
-      En son sürüm: <strong>Niko OS 0.1.0 (Temmuz 2025)</strong>
-    </p>
-
+    <p>Niko OS, gereksiz servislerden arındırılmış, performansa odaklı modlanmış bir Windows deneyimi sunar. Daha hızlı, daha sade, daha özgür.</p>
+    <p style="font-size: 0.95rem; opacity: 0.8;">En son sürüm: <strong>Niko OS 0.1.0 (Temmuz 2025)</strong></p>
     <div class="buttons">
       <a href="#playbook" class="start-btn">Başla</a>
       <a href="https://github.com/snapzenic/NikoOS-new" target="_blank" class="github-btn">GitHub'da Gör</a>
@@ -216,51 +208,37 @@
     ];
 
     const typedText = document.getElementById('changing-text');
-
-    let savedPhraseIndex = localStorage.getItem('phraseIndex');
-    let savedCharIndex = localStorage.getItem('charIndex');
-    let savedTyping = localStorage.getItem('typing');
-
-    let currentPhraseIndex = savedPhraseIndex !== null ? parseInt(savedPhraseIndex) : 0;
-    let currentCharIndex = savedCharIndex !== null ? parseInt(savedCharIndex) : 0;
-    let typing = savedTyping !== null ? (savedTyping === 'true') : true;
-
-    function saveState() {
-      localStorage.setItem('phraseIndex', currentPhraseIndex);
-      localStorage.setItem('charIndex', currentCharIndex);
-      localStorage.setItem('typing', typing);
-    }
+    let currentPhraseIndex = 0;
+    let currentCharIndex = 0;
+    let typing = true;
 
     function typeWriterEffect() {
       const phrase = phrases[currentPhraseIndex];
 
       if (typing) {
         if (currentCharIndex <= phrase.text.length) {
-          typedText.textContent = phrase.text.slice(0, currentCharIndex);
+          typedText.innerText = phrase.text.slice(0, currentCharIndex);
           typedText.style.background = phrase.gradient;
           typedText.style.webkitBackgroundClip = 'text';
           typedText.style.webkitTextFillColor = 'transparent';
-
           currentCharIndex++;
-          saveState();
-
           setTimeout(typeWriterEffect, 50);
         } else {
           typing = false;
-          saveState();
           setTimeout(typeWriterEffect, 5000);
         }
       } else {
         if (currentCharIndex >= 0) {
-          typedText.textContent = phrase.text.slice(0, currentCharIndex);
+          typedText.innerText = phrase.text.slice(0, currentCharIndex);
           currentCharIndex--;
-          saveState();
           setTimeout(typeWriterEffect, 30);
         } else {
-          typedText.textContent = "";
+          typedText.innerText = '';
+          typedText.style.background = 'none';
+          typedText.style.webkitBackgroundClip = 'unset';
+          typedText.style.webkitTextFillColor = 'unset';
           typing = true;
           currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
-          saveState();
           setTimeout(typeWriterEffect, 500);
         }
       }
@@ -269,4 +247,4 @@
     typeWriterEffect();
   </script>
 </body>
-  </html>
+</html>
