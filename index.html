@@ -1,156 +1,155 @@
-<!DOCTYPE html>
-<html lang="tr">
+<!DOCTYPE html><html lang="tr">
 <head>
   <title>Niko OS</title>
   <link rel="icon" type="image/webp" href="res/favicon.webp">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&display=swap');:root {
+  --transition-speed: 0.5s;
+  --gradient-light: linear-gradient(135deg, #ffffff 0%, #f0f4f8 50%, #e0e6ed 100%);
+  --gradient-dark: linear-gradient(135deg, #2a2a2a 0%, #3c3f41 50%, #1e2022 100%);
+}
 
-    :root {
-      --transition-speed: 0.5s;
-      --gradient-light: linear-gradient(135deg, #ffffff 0%, #f0f4f8 50%, #e0e6ed 100%);
-      --gradient-dark: linear-gradient(135deg, #2a2a2a 0%, #3c3f41 50%, #1e2022 100%);
-    }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+body {
+  font-family: 'Comfortaa', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: background var(--transition-speed), color var(--transition-speed);
+  text-align: center;
+  padding: 100px 20px 40px;
+}
 
-    body {
-      font-family: 'Comfortaa', sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      transition: background var(--transition-speed), color var(--transition-speed);
-      text-align: center;
-      padding: 100px 20px 40px;
-    }
+body.light-theme {
+  background: var(--gradient-light);
+  color: #222;
+}
 
-    body.light-theme {
-      background: var(--gradient-light);
-      color: #222;
-    }
+body.dark-theme {
+  background: var(--gradient-dark);
+  color: #eaeaea;
+}
 
-    body.dark-theme {
-      background: var(--gradient-dark);
-      color: #eaeaea;
-    }
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+}
 
-    .header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      padding: 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      backdrop-filter: blur(10px);
-      z-index: 1000;
-    }
+.theme-toggle {
+  background: none;
+  border: 2px solid currentColor;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all var(--transition-speed);
+}
 
-    .theme-toggle {
-      background: none;
-      border: 2px solid currentColor;
-      cursor: pointer;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      transition: all var(--transition-speed);
-    }
+.theme-icon {
+  font-size: 20px;
+}
 
-    .theme-icon {
-      font-size: 20px;
-    }
+body.light-theme .theme-toggle {
+  background-color: white;
+  border-color: #222;
+  color: #222;
+}
 
-    body.light-theme .theme-toggle {
-      background-color: white;
-      border-color: #222;
-      color: #222;
-    }
+body.dark-theme .theme-toggle {
+  background-color: transparent;
+  border-color: white;
+  color: white;
+}
 
-    body.dark-theme .theme-toggle {
-      background-color: transparent;
-      border-color: white;
-      color: white;
-    }
+.theme-toggle:hover {
+  transform: rotate(30deg) scale(1.1);
+  background-color: rgba(255, 255, 255, 0.1);
+}
 
-    .theme-toggle:hover {
-      transform: rotate(30deg) scale(1.1);
-      background-color: rgba(255, 255, 255, 0.1);
-    }
+footer {
+  margin-top: auto;
+  padding: 30px;
+  text-align: center;
+  font-size: 14px;
+  backdrop-filter: blur(5px);
+}
 
-    footer {
-      margin-top: auto;
-      padding: 30px;
-      text-align: center;
-      font-size: 14px;
-      backdrop-filter: blur(5px);
-    }
+#changing-text {
+  font-size: 2.5rem;
+  min-height: 45px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #4CAF50, #2196F3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: background 0.5s ease;
+  margin-bottom: 20px;
+}
 
-    #changing-text {
-      font-size: 2.5rem;
-      min-height: 45px;
-      font-weight: 700;
-      background: linear-gradient(135deg, #4CAF50, #2196F3);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      transition: background 0.5s ease;
-      margin-bottom: 20px;
-    }
+h3 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
 
-    h3 {
-      font-size: 2rem;
-      font-weight: 600;
-      margin-bottom: 30px;
-    }
+p {
+  max-width: 700px;
+  margin: 0 auto 30px;
+  font-size: 1.1rem;
+}
 
-    p {
-      max-width: 700px;
-      margin: 0 auto 30px;
-      font-size: 1.1rem;
-    }
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
 
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-      margin-top: 20px;
-    }
+.buttons a {
+  padding: 12px 24px;
+  border-radius: 9999px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
 
-    .buttons a {
-      padding: 12px 24px;
-      border-radius: 9999px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: background 0.3s ease;
-    }
+.start-btn {
+  background-color: transparent;
+  border: 2px solid #f44336;
+  color: #f44336;
+  transition: all 0.3s ease;
+  box-shadow: none;
+}
 
-    .start-btn {
-      background-color: transparent;
-      border: 2px solid #f44336;
-      color: #f44336;
-      transition: all 0.3s ease;
-    }
+.start-btn:hover {
+  color: white;
+  background-color: #f44336;
+  box-shadow: 0 0 8px 2px #f44336;
+}
 
-    .start-btn:hover {
-      color: white;
-      background-color: #f44336;
-      box-shadow: 0 0 8px 2px #f44336;
-    }
+.github-btn {
+  background-color: transparent;
+  border: 2px solid currentColor;
+  color: inherit;
+}
 
-    .github-btn {
-      background-color: transparent;
-      border: 2px solid currentColor;
-      color: inherit;
-    }
   </style>
 </head>
 <body class="light-theme">
@@ -159,24 +158,20 @@
     <button class="theme-toggle" id="theme-toggle" title="Tema Değiştir">
       <i class="fa-solid fa-moon theme-icon" id="theme-icon"></i>
     </button>
-  </header>
-
-  <main>
+  </header>  <main>
     <h2 id="changing-text"></h2>
     <h3>İleri seviye kullanıcılar için tasarlandı.</h3>
     <p>Niko OS, gereksiz servislerden arındırılmış, performansa odaklı modlanmış bir Windows deneyimi sunar. Daha hızlı, daha sade, daha özgür.</p>
-    <p style="font-size: 0.95rem; opacity: 0.8;">En son sürüm: <strong>Niko OS 0.1.0 (Temmuz 2025)</strong></p>
+    <p style="font-size: 0.95rem; opacity: 0.8;">
+      En son sürüm: <strong>Niko OS 0.1.0 (Temmuz 2025)</strong>
+    </p>
     <div class="buttons">
       <a href="#playbook" class="start-btn">Başla</a>
       <a href="https://github.com/snapzenic/NikoOS-new" target="_blank" class="github-btn">GitHub'da Gör</a>
     </div>
-  </main>
-
-  <footer>
+  </main>  <footer>
     &copy; 2025 Niko OS Team
-  </footer>
-
-  <script>
+  </footer>  <script>
     const toggleButton = document.getElementById('theme-toggle');
     const themeIcon = document.getElementById('theme-icon');
     const body = document.body;
@@ -213,35 +208,36 @@
     let typing = true;
 
     function typeWriterEffect() {
-  const phrase = phrases[currentPhraseIndex];
+      const phrase = phrases[currentPhraseIndex];
 
-  if (typing) {
-    if (currentCharIndex <= phrase.text.length) {
-      typedText.textContent = phrase.text.slice(0, currentCharIndex);
-      typedText.style.background = phrase.gradient;
-      typedText.style.webkitBackgroundClip = 'text';
-      typedText.style.webkitTextFillColor = 'transparent';
-      currentCharIndex++;
-      setTimeout(typeWriterEffect, 50);
-    } else {
-      typing = false;
-      currentCharIndex = phrase.text.length - 1; // <<< BUNU EKLE
-      setTimeout(typeWriterEffect, 4000);
-    }
-  } else {
-    if (currentCharIndex >= 0) {
-      typedText.textContent = phrase.text.slice(0, currentCharIndex);
-      currentCharIndex--;
-      setTimeout(typeWriterEffect, 30);
-    } else {
-      typing = true;
-      currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
-      setTimeout(typeWriterEffect, 500);
-    }
-  }
+      if (typing) {
+        if (currentCharIndex <= phrase.text.length) {
+          typedText.textContent = phrase.text.slice(0, currentCharIndex);
+          typedText.style.background = phrase.gradient;
+          typedText.style.webkitBackgroundClip = 'text';
+          typedText.style.webkitTextFillColor = 'transparent';
+          currentCharIndex++;
+          setTimeout(typeWriterEffect, 50);
+        } else {
+          typing = false;
+          setTimeout(typeWriterEffect, 5000);
+        }
+      } else {
+        if (currentCharIndex >= 0) {
+          typedText.textContent = phrase.text.slice(0, currentCharIndex);
+          currentCharIndex--;
+          setTimeout(typeWriterEffect, 30);
+        } else {
+          typedText.textContent = ''; // DOM'u kesin temizle
+          setTimeout(() => {
+            typing = true;
+            currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+            setTimeout(typeWriterEffect, 100);
+          }, 50);
+        }
+      }
     }
 
     typeWriterEffect();
-  </script>
-</body>
-</html>
+  </script></body>
+  </html>
