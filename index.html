@@ -98,10 +98,19 @@ footer {
   background: linear-gradient(135deg, #4CAF50, #2196F3);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  transition: background 0.5s ease;
-  margin-bottom: 20px;
+  transition: background 0.5s ease, transform 0.5s ease, opacity 0.5s ease;
+  opacity: 1;
+  transform: scale(1);
 }
-
+.fade-out {
+  opacity: 0;
+  transform: scale(0.8);
+}
+.fade-in {
+  opacity: 1;
+  transform: scale(1);
+}
+  
 h3 {
   font-size: 2rem;
   font-weight: 600;
@@ -201,49 +210,48 @@ p {
     });
 
     const phrases = [
-      { text: "Optimize edilmiş Windows.", gradient: "linear-gradient(135deg, #4CAF50, #2196F3)" },
-      { text: "Gizlilik odaklı Windows.", gradient: "linear-gradient(135deg, #8E24AA, #D81B60)" },
-      { text: "Sizi ön planda tutan Windows.", gradient: "linear-gradient(135deg, #FF9800, #F44336)" },
-      { text: "Kararlı ve hafif Windows.", gradient: "linear-gradient(135deg, #00BCD4, #3F51B5)" },
-      { text: "Arındırılmış, sade Windows.", gradient: "linear-gradient(135deg, #795548, #FFC107)" }
-    ];
+  { text: "Optimize edilmiş Windows.", gradient: "linear-gradient(135deg, #4CAF50, #2196F3)" },
+  { text: "Gizlilik odaklı Windows.", gradient: "linear-gradient(135deg, #8E24AA, #D81B60)" },
+  { text: "Sizi ön planda tutan Windows.", gradient: "linear-gradient(135deg, #FF9800, #F44336)" },
+  { text: "Kararlı ve hafif Windows.", gradient: "linear-gradient(135deg, #00BCD4, #3F51B5)" },
+  { text: "Arındırılmış, sade Windows.", gradient: "linear-gradient(135deg, #795548, #FFC107)" }
+];
 
-    const typedText = document.getElementById('changing-text');
-    let currentPhraseIndex = 0;
-    let currentCharIndex = 0;
-    let typing = true;
+const typedText = document.getElementById('changing-text');
+let currentPhraseIndex = parseInt(localStorage.getItem('phraseIndex')) || 0;
 
-    function typeWriterEffect() {
-      const phrase = phrases[currentPhraseIndex];
+function updateText() {
+  const phrase = phrases[currentPhraseIndex];
 
-      if (typing) {
-        if (currentCharIndex <= phrase.text.length) {
-          typedText.textContent = phrase.text.slice(0, currentCharIndex);
-          typedText.style.background = phrase.gradient;
-          typedText.style.webkitBackgroundClip = 'text';
-          typedText.style.webkitTextFillColor = 'transparent';
-          currentCharIndex++;
-          setTimeout(typeWriterEffect, 50);
-        } else {
-          typing = false;
-          setTimeout(typeWriterEffect, 5000);
-        }
-      } else {
-        if (currentCharIndex >= 0) {
-          typedText.textContent = phrase.text.slice(0, currentCharIndex);
-          currentCharIndex--;
-          setTimeout(typeWriterEffect, 30);
-        } else {
-          typedText.textContent = '';
-          setTimeout(() => {
-            typing = true;
-            currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
-            setTimeout(typeWriterEffect, 100);
-          }, 50);
-        }
-      }
-    }
+  typedText.classList.add('fade-out');
 
-    typeWriterEffect();
+  setTimeout(() => {
+    typedText.textContent = phrase.text;
+    typedText.style.background = phrase.gradient;
+    typedText.style.webkitBackgroundClip = 'text';
+    typedText.style.webkitTextFillColor = 'transparent';
+
+    typedText.classList.remove('fade-out');
+    typedText.classList.add('fade-in');
+    
+    setTimeout(() => {
+      typedText.classList.remove('fade-in');
+    }, 500);
+
+    currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+    localStorage.setItem('phraseIndex', currentPhraseIndex);
+  }, 500);
+}
+
+const phrase = phrases[currentPhraseIndex];
+typedText.textContent = phrase.text;
+typedText.style.background = phrase.gradient;
+typedText.style.webkitBackgroundClip = 'text';
+typedText.style.webkitTextFillColor = 'transparent';
+
+currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+localStorage.setItem('phraseIndex', currentPhraseIndex);
+
+setInterval(updateText, 5000);
   </script></body>
   </html>
