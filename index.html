@@ -209,35 +209,40 @@ p {
 ];
 
 const typedText = document.getElementById('changing-text');
-let currentPhraseIndex = parseInt(localStorage.getItem('phraseIndex')) || 0;
+const phraseDuration = 6000;
+const fadeDuration = 1000;
+
+function setPhrase(index) {
+  const phrase = phrases[index];
+  typedText.textContent = phrase.text;
+  typedText.style.background = phrase.gradient;
+  typedText.style.webkitBackgroundClip = 'text';
+  typedText.style.webkitTextFillColor = 'transparent';
+}
 
 function updateText() {
   typedText.style.opacity = 0;
 
   setTimeout(() => {
-    const phrase = phrases[currentPhraseIndex];
-    typedText.textContent = phrase.text;
-    typedText.style.background = phrase.gradient;
-    typedText.style.webkitBackgroundClip = 'text';
-    typedText.style.webkitTextFillColor = 'transparent';
-    typedText.style.opacity = 1;
-
     currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+    setPhrase(currentPhraseIndex);
+    typedText.style.opacity = 1;
     localStorage.setItem('phraseIndex', currentPhraseIndex);
-  }, 1000);
+    localStorage.setItem('lastChange', Date.now());
+  }, fadeDuration);
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  const phrase = phrases[currentPhraseIndex];
-  typedText.textContent = phrase.text;
-  typedText.style.background = phrase.gradient;
-  typedText.style.webkitBackgroundClip = 'text';
-  typedText.style.webkitTextFillColor = 'transparent';
+let currentPhraseIndex = parseInt(localStorage.getItem('phraseIndex')) || 0;
+let lastChange = parseInt(localStorage.getItem('lastChange')) || Date.now();
+const now = Date.now();
+const elapsed = now - lastChange;
+const phrasesPassed = Math.floor(elapsed / phraseDuration);
+currentPhraseIndex = (currentPhraseIndex + phrasesPassed) % phrases.length;
+localStorage.setItem('phraseIndex', currentPhraseIndex);
+localStorage.setItem('lastChange', now - (elapsed % phraseDuration));
 
-  currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
-  localStorage.setItem('phraseIndex', currentPhraseIndex);
-});
-
-setInterval(updateText, 6000);
+setPhrase(currentPhraseIndex);
+typedText.style.opacity = 1;
+setInterval(updateText, phraseDuration);
   </script></body>
   </html>
