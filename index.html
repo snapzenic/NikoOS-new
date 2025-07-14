@@ -98,19 +98,10 @@ footer {
   background: linear-gradient(135deg, #4CAF50, #2196F3);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  transition: background 0.5s ease, transform 0.5s ease, opacity 0.5s ease;
   opacity: 1;
-  transform: scale(1);
+  transition: opacity 1s ease, background 0.5s ease;
 }
-.fade-out {
-  opacity: 0;
-  transform: scale(0.8);
-}
-.fade-in {
-  opacity: 1;
-  transform: scale(1);
-}
-  
+    
 h3 {
   font-size: 2rem;
   font-weight: 600;
@@ -221,37 +212,32 @@ const typedText = document.getElementById('changing-text');
 let currentPhraseIndex = parseInt(localStorage.getItem('phraseIndex')) || 0;
 
 function updateText() {
-  const phrase = phrases[currentPhraseIndex];
-
-  typedText.classList.add('fade-out');
+  typedText.style.opacity = 0;
 
   setTimeout(() => {
+    const phrase = phrases[currentPhraseIndex];
     typedText.textContent = phrase.text;
     typedText.style.background = phrase.gradient;
     typedText.style.webkitBackgroundClip = 'text';
     typedText.style.webkitTextFillColor = 'transparent';
-
-    typedText.classList.remove('fade-out');
-    typedText.classList.add('fade-in');
-    
-    setTimeout(() => {
-      typedText.classList.remove('fade-in');
-    }, 500);
+    typedText.style.opacity = 1;
 
     currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
     localStorage.setItem('phraseIndex', currentPhraseIndex);
-  }, 500);
+  }, 1000);
 }
 
-const phrase = phrases[currentPhraseIndex];
-typedText.textContent = phrase.text;
-typedText.style.background = phrase.gradient;
-typedText.style.webkitBackgroundClip = 'text';
-typedText.style.webkitTextFillColor = 'transparent';
+window.addEventListener('DOMContentLoaded', () => {
+  const phrase = phrases[currentPhraseIndex];
+  typedText.textContent = phrase.text;
+  typedText.style.background = phrase.gradient;
+  typedText.style.webkitBackgroundClip = 'text';
+  typedText.style.webkitTextFillColor = 'transparent';
 
-currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
-localStorage.setItem('phraseIndex', currentPhraseIndex);
+  currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+  localStorage.setItem('phraseIndex', currentPhraseIndex);
+});
 
-setInterval(updateText, 5000);
+setInterval(updateText, 6000);
   </script></body>
   </html>
